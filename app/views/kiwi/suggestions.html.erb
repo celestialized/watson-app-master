@@ -1,0 +1,106 @@
+<main>
+	<div class="container">
+		<div class="row">
+			
+		</div>
+		<div class="row">
+			
+			<div class="col s12 m8 offset-m2 l6 offset-l3">
+				<p>Here's the profile we found:</p>
+		        <div class="card-panel grey lighten-5 z-depth-1">
+		          <div class="row valign-wrapper">
+		            <div class="col s2">
+		              <img src="<%= @profile_pic_url %>" alt="" class="circle responsive-img">
+		            </div>
+		            <div class="col s10">
+		              <span class="black-text">
+		                <strong><%= @name %></strong>
+		              </span>
+		              <br>
+		              <span class="black-text">
+		                <%= @bio %>
+		              </span>
+		            </div>
+		          </div>
+		        </div>
+      		</div> 
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+		<div class="row">
+			<div class="col s12 m8 offset-m2 l6 offset-l3">
+				<p>Here's the radar chart. Each axis measures one of the <%= link_to 'Big Five personality traits', 'https://en.wikipedia.org/wiki/Big_Five_personality_traits' %>. </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="s12">
+				<canvas id="personalityChart"></canvas>
+			</div>
+			<div class="col s12 m8 offset-m2 l6 offset-l3">
+				<p>The test shop is no longer active, so products are no longer being recommended, but we can still analyse personalities.</p>
+
+				<p>If you'd like to integrate this to your shop, contact me through the Github page linked in the footer. You can also visit it for the code. </p>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var ctx = document.getElementById('personalityChart').getContext('2d')
+			var personalityChart = new Chart(ctx, {
+			  type: 'radar',
+			  data: {
+			    labels: ['Openness', 'Extraversion', 'Emotional Range', 'Conscientiousness', 'Agreeableness'],
+			    fontSize: "18",
+			    datasets: [{
+		          pointHighlightFill : "gray",
+			      label: 'Percentile',
+
+			      data: ["<%= @analysis["personality"][0]["percentile"] * 100 %>",
+			      		 "<%= @analysis["personality"][1]["percentile"] * 100 %>",
+			      		 "<%= @analysis["personality"][2]["percentile"] * 100 %>",
+			      		 "<%= @analysis["personality"][3]["percentile"] * 100 %>",
+			      		 "<%= @analysis["personality"][4]["percentile"] * 100 %>"
+			      		],
+			      backgroundColor: "rgba(186, 53, 40, 0.4)",
+
+			    }]
+			  },
+			  options: { 
+		        legend: {
+		            labels: {
+		                fontColor: "gray" 
+		                              
+		            }
+		        },
+
+		        scale: {
+		        	gridLines: {
+		        		color: "gray"
+		        		
+		        	},
+
+		        	pointLabels: {
+		            backgroundColor: "gray"
+		           
+		          }
+		        },
+
+		        responsive: true
+
+
+		    }
+			});
+			Chart.defaults.global.defaultFontColor = 'gray';
+
+
+
+		</script>
+		<div class="line"></div>
+
+		<div class="product-content">
+		<div style="color: white">
+			
+		</div>
+		</div>
+	</div>
+</main>
+
+
